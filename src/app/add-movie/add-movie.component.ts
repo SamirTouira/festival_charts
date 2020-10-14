@@ -17,38 +17,44 @@ export class AddMovieComponent implements OnInit {
     public fb: FormBuilder,       // Form Builder service for Reactive forms
     public toastr: ToastrService  // Toastr service for alert message
 
-  ) { }
+  ) { 
+    this.moviesForm = this.fb.group({
+      title: ['', [Validators.required, Validators.minLength(2)]],
+      language: new FormControl(''),
+      producer: new FormControl('')
+      
+    })  
+  }
 
   ngOnInit(): void {
-    this.crudApi.GetMoviesList();  // Call GetMoviesList() before main form is being called
-    this.movieForm();              // Call movie form when component is ready
-
+    // this.crudApi.GetMoviesList();  // Call GetMoviesList() before main form is being called
+    // this.movieForm();              // Call movie form when component is ready
+    console.log("kikou");
   }
 
  movieForm() {
-    this.moviesForm = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(2)]],
-      language: [''],
-      producer: ['']
-    })  
+
   }
   // Accessing form control using getters
-  get firstName() {
+  get title() {
     return this.moviesForm.get('title');
   }
-  get lastName() {
+  get language() {
     return this.moviesForm.get('language');
   }  
-  get email() {
+  get producer() {
     return this.moviesForm.get('producer');
   }
-  ResetForm() {
+  resetForm() {
     this.moviesForm.reset();
   }  
   submitMovieData() {
-    this.crudApi.AddMovie(this.moviesForm.value); // Submit student data using CRUD API
-    this.toastr.success(this.moviesForm.controls['title'].value + ' successfully added!'); // Show success message when data is successfully submited
-    this.ResetForm();  // Reset form when clicked on reset button
+     // Submit movie data using CRUD API
+    this.crudApi.addMovie(this.moviesForm.value);
+     // Show success message when data is successfully submited
+    this.toastr.success(this.moviesForm.controls['title'].value + ' successfully added!');
+     // Reset form when clicked on reset button
+    this.resetForm();
    };
 
 }

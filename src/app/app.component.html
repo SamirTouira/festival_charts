@@ -297,7 +297,6 @@
     }
   }
 </style>
-<router-outlet></router-outlet>
 <!-- Sidebar navigation -->
 <div class="container-fluid">
   <div class="row">
@@ -317,7 +316,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" routerLink="/view-movies" routerLinkActive="active">
+            <a class="nav-link" routerLink="/movie-list" routerLinkActive="active">
               <i class="fas fa-list-ul"></i>Movies list
             </a>
           </li>
@@ -339,16 +338,6 @@
     </a>
 </div>
 
-<section class="content" role="main">
-  <article>
-    List of movies : 
-  <div *ngFor="let movie of movies"><br/>
-Movie : {{movie.title}}<br/><br/>
-Language : {{movie.language}}<br/><br/>
-Producer : {{movie.producer}}<br/><br/>
 
 
-  </div>
-</article>
-</section>
-
+<router-outlet></router-outlet>

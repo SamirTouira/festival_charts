@@ -7,19 +7,20 @@ import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NG_ENTITY_SERVICE_CONFIG } from '@datorama/akita-ng-entity-service';
-import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
-import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
-import { environment } from '../environments/environment';
+import { AkitaNgDevtools } from '@datorama/akita-ngdevtools'; // à laisser pour le moment
+import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store'; // à laisser pour le moment
+import { environment } from '../environments/environment'; // à laisser pour le moment
 import { EditMovieComponent } from './edit-movie/edit-movie.component';
 import { MovieListComponent } from './movie-list/movie-list.component';
 import { AddMovieComponent } from './add-movie/add-movie.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 const routes: Routes = [
   { path: '', redirectTo: '/edit-movie', pathMatch: 'full' },
   { path: 'add-movie', component: AddMovieComponent },
+  { path: 'movie-list', component: MovieListComponent },
   { path: 'edit-movie', component: EditMovieComponent }
 ];
 
@@ -30,12 +31,11 @@ const routes: Routes = [
     EditMovieComponent,
     MovieListComponent,
     AddMovieComponent,
- 
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule, // required animations module
-    AppRoutingModule,
+    FlexLayoutModule,
     // environment.production ? [] : AkitaNgDevtools.forRoot(),
     // AkitaNgRouterStoreModule.forRoot(),
     FormsModule,
@@ -45,6 +45,6 @@ const routes: Routes = [
     RouterModule.forRoot(routes)
   ],
   providers: [{ provide: NG_ENTITY_SERVICE_CONFIG, useValue: { baseUrl: 'https://jsonplaceholder.typicode.com' }}],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
+  bootstrap: [AppComponent]})
+
+  export class AppModule { }

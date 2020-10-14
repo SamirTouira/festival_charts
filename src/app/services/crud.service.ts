@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {movies} from '../fake-data';
-import { MovieListComponent } from '../movie-list/movie-list.component';
-import {AppComponent} from '../app.component';
+
 export interface Movie {
     $id: string;
     title: string;
@@ -18,7 +17,8 @@ public movies = movies;
   
   constructor() { }
 
-  AddMovie(movie: Movie) {
+// CRUD -> Create Movie
+  addMovie(movie: Movie) {
     this.movies.push({
       id: movie.$id,
       title: movie.title,
@@ -27,10 +27,8 @@ public movies = movies;
     })
   }
 
-  GetMoviesList() {
-    this.movies = movies;
+  //Get Movies List
+  getMoviesList() {
     return this.movies;
-  }  
-
-
+  }
 }
