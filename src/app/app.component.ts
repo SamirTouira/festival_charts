@@ -11,6 +11,7 @@ export class AppComponent implements OnInit {
   public movies = movies;
   ngOnInit(): void {
 console.log(movies);
+console.log("coucou");
   }
 
 }
