@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import {movies} from '../fake-data';
-import { CrudService } from '../services/crud.service';
+import { CrudService, Movie } from '../services/crud.service';
 
 @Component({
   selector: 'app-movie-list',
@@ -9,12 +10,11 @@ import { CrudService } from '../services/crud.service';
 })
 export class MovieListComponent implements OnInit {
   title = 'ArchipelCharts';
-  // public movies = movies;
-  public movies;
+  public sub: Subscription;
+  public movies: Movie[];
 
   constructor(private crudService: CrudService) {}
   ngOnInit(): void {
-    console.log(movies);
-    this.movies = this.crudService.getMoviesList();
+    this.crudService.getMoviesList().subscribe(moviesList => this.movies = moviesList);
   }
 }

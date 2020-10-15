@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import {movies} from '../fake-data';
 
 export interface Movie {
@@ -16,7 +17,6 @@ export class CrudService {
 public movies = movies;
   constructor() { }
 
-// CRUD -> Create Movie
   addMovie(movie: Movie) {
     this.movies.push({
       id: movie.id,
@@ -27,7 +27,21 @@ public movies = movies;
   }
 
   //Get Movies List
-  getMoviesList() {
-    return this.movies;
+  getMoviesList(): Observable<Movie[]> {
+    return of(movies);
   }
+
+  getMovie(id: string){
+    return this.movies.find(m => id === m.id);
+  }
+
+    // Update Student Object
+    // updateMovie(movie: Movie) {
+    //   this.movies.update({
+    //     id: movie.id,
+    //     title: movie.title,
+    //     language: movie.language,
+    //     producer: movie.producer,
+    //   });
+    // }
 }

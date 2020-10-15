@@ -1,4 +1,4 @@
-<section class="content" role="main">
+<!-- <section class="content" role="main">
   <article>
     List of movies :
     <div *ngFor="let movie of movies"><br/>
@@ -7,4 +7,35 @@
       Producer : {{movie.producer}}<br/><br/>
     </div>
   </article>
-</section>
+  </section> -->
+
+  <!-- Showing movies data -->
+  <div>
+    <table class="table table-bordered table-responsive-sm table-responsive-md table-responsive-lg">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Title</th>
+          <th scope="col">Language</th>
+          <th scope="col">Producer</th>
+          <th class="text-center" scope="col">Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- *ngFor loop iterates over Game array and fetch the game's data -->
+        <!-- paginate pipe will add pagination in game's list, it won't show if items are less then 7 -->
+        <tr *ngFor="let movie of movies">
+          <th scope="row">{{movie.id}}</th>
+          <td style="margin-top:50px!important;"><strong>{{movie.title}}</strong></td>
+          <td style="margin-top:50px;">{{movie.language}}</td>
+          <td style="margin-top:50px;">{{movie.producer}} </td>
+          <td class="text-center">
+            <!-- routerLink="/game-edit/{{game.$key}}" is refered to { path: 'game-edit/:id', component: EditGameComponent } in app-routing.moudles.ts -->
+            <i class="far fa-edit" routerLink="/edit-movie/{{movie.id}}"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <!-- <i class="far fa-trash-alt" (click)="deleteGame(game)"></i> -->
+        </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
