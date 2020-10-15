@@ -14,9 +14,7 @@ export class MovieListComponent implements OnInit {
 
   constructor(private crudService: CrudService) {}
   ngOnInit(): void {
-console.log(movies);
+    console.log(movies);
     this.movies = this.crudService.getMoviesList();
-
   }
-
 }

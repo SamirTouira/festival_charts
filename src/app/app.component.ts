@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {movies} from './fake-data';
 
 @Component({
@@ -6,12 +6,8 @@ import {movies} from './fake-data';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'ArchipelCharts';
   public movies = movies;
-  ngOnInit(): void {
-console.log(movies);
-console.log("coucou");
-  }
 
 }
