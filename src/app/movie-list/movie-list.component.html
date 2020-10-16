@@ -20,6 +20,7 @@
           <td class="text-center">
             <!-- routerLink="/game-edit/{{movie.id}}" is refered to { path: 'edit-movie/:id', component: EditGameComponent } in app-routing.module.ts -->
             <a routerLink="/edit-movie/{{movie.id}}"><i class="far fa-edit"></i></a>
+            <button (click)="deleteMovie(movie)"><i class="far fa-trash-alt"></i></button>
             <!-- <i class="far fa-trash-alt" (click)="deleteGame(game)"></i> -->
         </td>
         </tr>
