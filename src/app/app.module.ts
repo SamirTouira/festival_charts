@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/edit-movie', pathMatch: 'full' },
   { path: 'add-movie', component: AddMovieComponent },
   { path: 'movie-list', component: MovieListComponent },
-  { path: 'edit-movie', component: EditMovieComponent }
+  { path: 'edit-movie/:id', component: EditMovieComponent }
 ];
 
 

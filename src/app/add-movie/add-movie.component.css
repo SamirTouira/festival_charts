@@ -6,3 +6,7 @@ p{
 p.error{
     color: red;
 }
+
+div.row{
+    margin-left: 30px;
+}

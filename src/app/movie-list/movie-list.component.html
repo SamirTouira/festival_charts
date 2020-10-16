@@ -1,10 +1,29 @@
-<section class="content" role="main">
-  <article>
-    List of movies :
-    <div *ngFor="let movie of movies"><br/>
-      Movie : {{movie.title}}<br/><br/>
-      Language : {{movie.language}}<br/><br/>
-      Producer : {{movie.producer}}<br/><br/>
-    </div>
-  </article>
-</section>
+  <!-- Showing movies data -->
+  <div>
+    <table class="table table-bordered table-responsive-sm table-responsive-md table-responsive-lg">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Title</th>
+          <th scope="col">Language</th>
+          <th scope="col">Producer</th>
+          <th class="text-center" scope="col">Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- *ngFor loop iterates over Movie array and fetch the movie's data -->
+        <tr *ngFor="let movie of movies">
+          <th scope="row">{{movie.id}}</th>
+          <td style="margin-top:50px!important;"><strong>{{movie.title}}</strong></td>
+          <td style="margin-top:50px;">{{movie.language}}</td>
+          <td style="margin-top:50px;">{{movie.producer}} </td>
+          <td class="text-center">
+            <!-- routerLink="/game-edit/{{movie.id}}" is refered to { path: 'edit-movie/:id', component: EditGameComponent } in app-routing.module.ts -->
+            <a routerLink="/edit-movie/{{movie.id}}"><i class="far fa-edit"></i></a>
+            <!-- <i class="far fa-trash-alt" (click)="deleteGame(game)"></i> -->
+        </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
