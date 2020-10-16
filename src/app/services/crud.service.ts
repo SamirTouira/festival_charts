@@ -44,4 +44,9 @@ public movies = movies;
     this.movies.splice(index[index.length - 1], 1, movie);
   }
 
+  deleteMovieService(movie: Movie) {
+    const index = this.getIndex(movie);
+    this.movies.splice(index[index.length - 1], 1);
+  }
+
 }
