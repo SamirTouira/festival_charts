@@ -1,11 +1,7 @@
-p{
+span, span.error{
     text-align: center;
 }
 
-
-p.error{
-    color: red;
-}
 
 div.row{
     margin-left: 30px;

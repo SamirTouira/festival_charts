@@ -5,6 +5,11 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ToastrModule } from 'ngx-toastr';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
 
 
 import { AppComponent } from './app.component';
@@ -36,6 +41,10 @@ const routes: Routes = [
     BrowserModule,
     BrowserAnimationsModule, // required animations module
     FlexLayoutModule,
+    MatCardModule,
+    MatButtonModule,
+    MatInputModule,
+    MatFormFieldModule,
     // environment.production ? [] : AkitaNgDevtools.forRoot(),
     // AkitaNgRouterStoreModule.forRoot(),
     FormsModule,
