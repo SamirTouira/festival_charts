@@ -1,10 +1,10 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { CrudService, Movie } from '../services/crud.service';
-import { ActivatedRoute, Router } from '@angular/router'; // ActivatedRoue is used to get the current associated components information.
+import { CrudService } from '../services/crud.service';
+// ActivatedRoue is used to get the current associated components information.
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Location } from '@angular/common';  // Location service is used to go back to previous component
 import { ToastrService } from 'ngx-toastr';
-import { movies } from '../fake-data';
 
 @Component({
   selector: 'app-edit-movie',
@@ -12,15 +12,14 @@ import { movies } from '../fake-data';
   styleUrls: ['./edit-movie.component.css']
 })
 export class EditMovieComponent implements OnInit {
-  editForm: FormGroup;  // Define FormGroup to movie's edit form
+  public editForm: FormGroup;  // Define FormGroup to movie's edit form
   public movieId = this.actRoute.snapshot.paramMap.get('id');  // Getting current component's id or information using ActivatedRoute service
-  public movies = movies;
 
   constructor(
     private crudApi: CrudService,       // Inject CRUD API in constructor
     private fb: FormBuilder,            // Inject Form Builder service for Reactive forms
     private location: Location,         // Location service to go back to previous component
-    private actRoute: ActivatedRoute,   // Activated route to get the current component's inforamation
+    private actRoute: ActivatedRoute,   // Activated route to get the current component's information
     private router: Router,             // Router service to navigate to specific component
     private toastr: ToastrService       // Toastr service for alert message
   ){ }
@@ -28,9 +27,13 @@ export class EditMovieComponent implements OnInit {
     // this.updateMovieData();   // Call updateMovieData() as soon as the component is ready
     const movie = this.crudApi.getMovie(this.movieId);
     this.editForm = this.fb.group({
-      title: movie.title,
+      title: [movie.title, [Validators.required, Validators.minLength(2)]],
       language: movie.language,
       producer: movie.producer
+    });
+
+    this.actRoute.params.subscribe((params: Params) => {
+      this.movieId = params['id'];
     });
 
     // this.editForm = this.fb.group({
@@ -55,25 +58,12 @@ export class EditMovieComponent implements OnInit {
   }
   // Below methods fire when somebody click on submit button
 
-  edit(data) {
-  // const movie = this.crudApi.getMovie(this.movieId);
-  // this.crudApi.getMovie(this.movieId).valueChanges().subscribe(data => {
-  return this.movies.map(movie => {
-    if (movie.id === this.movieId){
-      const newMovie = this.editForm.patchValue({
-        id: movie.id,
-        title: data.title, language: data.language, producer: data.producer
-      });
-      console.log(this.editForm);
-      /* tslint:disable:no-string-literal */
-      this.toastr.success(this.editForm.controls['title'].value + ' updated successfully');
-      /* tslint:enable:no-string-literal */
-      return newMovie;
-    }
-  });
-
-  // });
-  // this.editForm.setValue(data.title);
-
+  resetForm() {
+    this.editForm.reset();
+  }
+  edit() {
+    this.crudApi.updateMovie({...this.editForm.value,id :this.movieId});
+    this.toastr.success(this.editForm.controls['title'].value + ' successfully updated!');
+    this.resetForm();
   }
 }

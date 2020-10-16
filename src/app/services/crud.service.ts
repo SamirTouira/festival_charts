@@ -35,13 +35,13 @@ public movies = movies;
     return this.movies.find(m => id === m.id);
   }
 
-    // Update Student Object
-    // updateMovie(movie: Movie) {
-    //   this.movies.update({
-    //     id: movie.id,
-    //     title: movie.title,
-    //     language: movie.language,
-    //     producer: movie.producer,
-    //   });
-    // }
+  getIndex(movie: Movie){
+    return this.movies.map((m, i) => movie.id === m.id ? i : undefined).filter(ele => ele !== undefined);
+  }
+
+  updateMovie(movie: Movie){
+    const index = this.getIndex(movie);
+    this.movies.splice(index[index.length - 1], 1, movie);
+  }
+
 }

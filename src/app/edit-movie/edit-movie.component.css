@@ -2,6 +2,10 @@ p{
     text-align: center;
 }
 
+p.error{
+  color: red;
+}
+
 div{
 margin-top: 50px;
 }
