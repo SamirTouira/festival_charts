@@ -1,6 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
-import {movies} from '../fake-data';
 import { CrudService, Movie } from '../services/crud.service';
 
 @Component({
@@ -10,7 +8,6 @@ import { CrudService, Movie } from '../services/crud.service';
 })
 export class MovieListComponent implements OnInit {
   title = 'ArchipelCharts';
-  public sub: Subscription;
   public movies: Movie[];
 
   constructor(private crudService: CrudService) {}

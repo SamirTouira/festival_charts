@@ -24,7 +24,6 @@ export class EditMovieComponent implements OnInit {
     private toastr: ToastrService       // Toastr service for alert message
   ){ }
   ngOnInit() {
-    // this.updateMovieData();   // Call updateMovieData() as soon as the component is ready
     const movie = this.crudApi.getMovie(this.movieId);
     this.editForm = this.fb.group({
       title: [movie.title, [Validators.required, Validators.minLength(2)]],
@@ -35,10 +34,6 @@ export class EditMovieComponent implements OnInit {
     this.actRoute.params.subscribe((params: Params) => {
       this.movieId = params['id'];
     });
-
-    // this.editForm = this.fb.group({
-    //   title = this.movieId
-    // });
   }
   // Accessing form control using getters
   get title() {
@@ -50,7 +45,6 @@ export class EditMovieComponent implements OnInit {
   get producer() {
     return this.editForm.get('producer');
   }
-  // Contains Reactive Form logic
 
   // Go back to previous component
   goBack() {

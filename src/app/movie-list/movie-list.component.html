@@ -19,7 +19,7 @@
           <td style="margin-top:50px;">{{movie.producer}} </td>
           <td class="text-center">
             <!-- routerLink="/game-edit/{{movie.id}}" is refered to { path: 'edit-movie/:id', component: EditGameComponent } in app-routing.module.ts -->
-            <i class="far fa-edit" routerLink="/edit-movie/{{movie.id}}"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a routerLink="/edit-movie/{{movie.id}}"><i class="far fa-edit"></i></a>
             <!-- <i class="far fa-trash-alt" (click)="deleteGame(game)"></i> -->
         </td>
         </tr>
