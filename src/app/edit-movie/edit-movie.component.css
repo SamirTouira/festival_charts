@@ -1,11 +1,11 @@
-p{
-    text-align: center;
+form{
+  padding: 15px;
 }
 
-p.error{
-  color: red;
+mat-form-field{
+  width: 100%;
 }
 
-div{
-margin-top: 50px;
+.custom-text{
+  margin: 15px;
 }

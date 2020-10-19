@@ -1,30 +1,26 @@
   <!-- Showing movies data -->
-  <div>
-    <table class="table table-bordered table-responsive-sm table-responsive-md table-responsive-lg">
-      <thead>
-        <tr>
-          <th scope="col">Id</th>
-          <th scope="col">Title</th>
-          <th scope="col">Language</th>
-          <th scope="col">Producer</th>
-          <th class="text-center" scope="col">Edit</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- *ngFor loop iterates over Movie array and fetch the movie's data -->
-        <tr *ngFor="let movie of movies">
-          <th scope="row">{{movie.id}}</th>
-          <td style="margin-top:50px!important;"><strong>{{movie.title}}</strong></td>
-          <td style="margin-top:50px;">{{movie.language}}</td>
-          <td style="margin-top:50px;">{{movie.producer}} </td>
-          <td class="text-center">
-            <!-- routerLink="/game-edit/{{movie.id}}" is refered to { path: 'edit-movie/:id', component: EditGameComponent } in app-routing.module.ts -->
-            <a routerLink="/edit-movie/{{movie.id}}"><i class="far fa-edit"></i></a>
-            <button (click)="deleteMovie(movie)"><i class="far fa-trash-alt"></i></button>
-            <!-- <i class="far fa-trash-alt" (click)="deleteGame(game)"></i> -->
-        </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+<article fxLayout="row wrap" fxLayoutAlign="space-around center">
+  <ng-container *ngFor="let movie of movies">
+    <mat-card>
+      <mat-card-title>
+        {{movie.title | titlecase}}
+      </mat-card-title>
+      <mat-card-content>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse iaculis lectus malesuada, condimentum enim at, accumsan turpis. Sed quis velit a sapien luctus pretium.
+          Mauris facilisis neque velit. Maecenas eget ipsum ultricies, imperdiet ipsum id, euismod erat.
+          Phasellus eget odio eget enim porttitor placerat eu non justo. In efficitur mollis dolor eget accumsan. Sed sed viverra odio. Donec iaculis, magna vel maximus dignissim, turpis nisl varius lacus, eu faucibus enim arcu sit amet elit.
+        </p>
+        <span>coucou</span>
+      </mat-card-content>
+      <mat-card-actions>
+        <a mat-raised-button color="primary" routerLink="/edit-movie/{{movie.id}}">Edit</a>
+        <button mat-raised-button color="accent" (click)="deleteMovie(movie)"><!--<i class="far fa-trash-alt"></i>--> Delete</button>
+      </mat-card-actions>
+
+      <mat-card-footer>By {{movie.producer}}</mat-card-footer>
+    </mat-card>
+  </ng-container>
+</article>
+
 

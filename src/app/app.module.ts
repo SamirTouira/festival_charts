@@ -5,6 +5,13 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ToastrModule } from 'ngx-toastr';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 
 
 import { AppComponent } from './app.component';
@@ -17,9 +24,13 @@ import { MovieListComponent } from './movie-list/movie-list.component';
 import { AddMovieComponent } from './add-movie/add-movie.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TrucalaconComponent } from './trucalacon/trucalacon.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatListModule} from '@angular/material/list';
+import {MatIconModule} from '@angular/material/icon';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/edit-movie', pathMatch: 'full' },
+  { path: '', redirectTo: '/movie-list', pathMatch: 'full' },
   { path: 'add-movie', component: AddMovieComponent },
   { path: 'movie-list', component: MovieListComponent },
   { path: 'edit-movie/:id', component: EditMovieComponent }
@@ -33,11 +44,21 @@ const routes: Routes = [
     MovieListComponent,
     AddMovieComponent,
     TrucalaconComponent,
+    SidenavComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule, // required animations module
     FlexLayoutModule,
+    MatCardModule,
+    MatButtonModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    MatListModule,
+    MatIconModule,
     // environment.production ? [] : AkitaNgDevtools.forRoot(),
     // AkitaNgRouterStoreModule.forRoot(),
     FormsModule,
