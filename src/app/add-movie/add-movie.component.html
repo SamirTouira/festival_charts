@@ -39,7 +39,7 @@
     <textarea matInput id="description"></textarea>
   </mat-form-field>
 
-  <div class="form-group text-right">
+  <div class="form-group" fxLayoutAlign="flex-end">
     <button type="button" class="btn btn-warning mr-2" (click)="resetForm()">Reset</button>
     <button type="submit" class="btn btn-primary" [disabled]="!moviesForm.valid">Add Movie</button>
   </div>
