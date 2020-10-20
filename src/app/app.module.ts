@@ -16,6 +16,7 @@ import { EditMovieComponent } from './edit-movie/edit-movie.component';
 import { MovieListComponent } from './movie-list/movie-list.component';
 import { AddMovieComponent } from './add-movie/add-movie.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { TrucalaconComponent } from './trucalacon/trucalacon.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/edit-movie', pathMatch: 'full' },
@@ -31,6 +32,7 @@ const routes: Routes = [
     EditMovieComponent,
     MovieListComponent,
     AddMovieComponent,
+    TrucalaconComponent,
   ],
   imports: [
     BrowserModule,
