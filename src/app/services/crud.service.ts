@@ -2,12 +2,18 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import {movies} from '../fake-data';
 import { Location } from '@angular/common';
+// const data = require('../data-ter');
+import * as data from '../data-ter.json';
+
 
 export interface Movie {
-    id: string;
+    id: number;
     title: string;
-    language: string;
-    producer: string;
+    languages: string;
+    producer: {
+      firstName: string,
+      lastName: string
+    };
  }
 
 @Injectable({
@@ -15,24 +21,24 @@ export interface Movie {
 })
 export class CrudService {
 
-public movies = movies;
+  public movies = data.movies;
   constructor(private location: Location) { }
 
   addMovie(movie: Movie) {
     this.movies.push({
       id: movie.id,
       title: movie.title,
-      language: movie.language,
+      languages: movie.languages,
       producer: movie.producer
     });
   }
 
   //Get Movies List
   getMoviesList(): Observable<Movie[]> {
-    return of(movies);
+    return of(this.movies);
   }
 
-  getMovie(id: string){
+  getMovie(id: number){
     return this.movies.find(m => id === m.id);
   }
 

@@ -18,7 +18,7 @@
         <button mat-raised-button color="accent" (click)="deleteMovie(movie)"><!--<i class="far fa-trash-alt"></i>--> Delete</button>
       </mat-card-actions>
 
-      <mat-card-footer>By {{movie.producer}}</mat-card-footer>
+      <mat-card-footer>By {{movie.producer.firstName}} {{movie.producer.lastName}}</mat-card-footer>
     </mat-card>
   </ng-container>
 </article>
