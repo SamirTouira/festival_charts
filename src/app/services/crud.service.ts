@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import {movies} from '../fake-data';
-import { Location } from '@angular/common';
-// const data = require('../data-ter');
 import * as data from '../data-ter.json';
 
 
@@ -22,7 +20,7 @@ export interface Movie {
 export class CrudService {
 
   public movies = data.movies;
-  constructor(private location: Location) { }
+  constructor() { }
 
   addMovie(movie: Movie) {
     this.movies.push({

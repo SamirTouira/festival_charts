@@ -29,7 +29,10 @@ export class EditMovieComponent implements OnInit {
     this.editForm = this.fb.group({
       title: [movie.title, [Validators.required, Validators.minLength(2)]],
       languages: movie.languages,
-      producer: movie.producer
+      producer: this.fb.group({
+        firstName: movie.producer.firstName,
+        lastName: movie.producer.lastName
+      })
     });
 
     this.actRoute.params.subscribe((params: Params) => {

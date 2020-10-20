@@ -1,12 +1,12 @@
-  <h1 class="custom-text">Add Movie</h1>
-  <span class="custom-text">Add a <strong>movie</strong></span>
+<h1 class="custom-text">Add Movie</h1>
+<span class="custom-text">Add a <strong>movie</strong></span>
 <!-- Movie form -->
 <form [formGroup]="moviesForm" (ngSubmit)="submitMovieData()" fxLayout="column" novalidate>
 
   <article fxLayout="row" fxLayoutGap="15px" fxFlex>
     <mat-form-field appearance="outline">
       <mat-label>Title of movie</mat-label>
-      <input matInput type="text" formControlName="title" id="titleMovie" placeholder="Ex : Avatar" required>
+      <input matInput type="text" formControlName="title" placeholder="Ex : Avatar" required>
       <!-- Showing errors using getter method -->
       <mat-error *ngIf="title.touched && title.invalid" class="error"><sup>*</sup>Please enter atleast a title of movie<br/></mat-error>
       <mat-error *ngIf="title.errors?.minlength" class="error"><sup>*</sup>Name shouldn't be less than 2 words</mat-error>
@@ -14,25 +14,33 @@
 
     <mat-form-field appearance="outline">
       <mat-label>Language</mat-label>
-      <input matInput type="text" formControlName="language" id="languageMovie" required>
+      <input matInput type="text" formControlName="languages" required>
       <!-- Showing errors using getter method -->
-      <mat-error *ngIf="language.touched && language.invalid" class="error"><sup>*</sup>Please type the language of the movie</mat-error>
+      <mat-error *ngIf="languages.touched && languages.invalid" class="error"><sup>*</sup>Please type the language of the movie</mat-error>
     </mat-form-field>
   </article>
 
-  <article fxLayout="row" fxLayoutGap="15px" fxFlex>
-    <mat-form-field class="producer-field" appearance="outline">
-      <mat-label>Producer</mat-label>
-      <input matInput type="text" formControlName="producer" id="producerMovie" required>
+
+  <article [formGroup]="producer" fxLayout="row" fxLayoutGap="15px" fxFlex>
+    <mat-form-field appearance="outline">
+      <mat-label>First name</mat-label>
+      <input matInput type="text" formControlName="firstName" required>
       <!-- Showing errors using getter method -->
       <mat-error *ngIf="producer.touched && producer.invalid" class="error"><sup>*</sup>Please provide the producer</mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="outline" color="primary">
-      <mat-label>Release Date</mat-label>
-      <input matInput type="date" id="releaseDate">
+    <mat-form-field appearance="outline">
+      <mat-label>Last name</mat-label>
+      <input matInput type="text" formControlName="lastName" required>
+      <!-- Showing errors using getter method -->
+      <mat-error *ngIf="producer.touched && producer.invalid" class="error"><sup>*</sup>Please provide the producer</mat-error>
     </mat-form-field>
   </article>
+
+  <mat-form-field appearance="outline" color="primary">
+    <mat-label>Release Date</mat-label>
+    <input matInput type="date" id="releaseDate">
+  </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Description</mat-label>
