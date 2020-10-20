@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import {movies} from '../fake-data';
+import { Location } from '@angular/common';
 
 export interface Movie {
     id: string;
@@ -15,7 +16,7 @@ export interface Movie {
 export class CrudService {
 
 public movies = movies;
-  constructor() { }
+  constructor(private location: Location) { }
 
   addMovie(movie: Movie) {
     this.movies.push({
@@ -35,18 +36,20 @@ public movies = movies;
     return this.movies.find(m => id === m.id);
   }
 
-  getIndex(movie: Movie){
-    return this.movies.map((m, i) => movie.id === m.id ? i : undefined).filter(ele => ele !== undefined);
+  getIndex(id){
+    return this.movies.findIndex(m => m.id === id);
   }
 
   updateMovie(movie: Movie){
-    const index = this.getIndex(movie);
-    this.movies.splice(index[index.length - 1], 1, movie);
+    const index = this.getIndex(movie.id);
+    this.movies.splice(index, 1, movie);
+    console.log(this.movies);
+    return this.movies;
   }
 
-  deleteMovieService(movie: Movie) {
-    const index = this.getIndex(movie);
-    this.movies.splice(index[index.length - 1], 1);
+  deleteMovieService(id) {
+    const index = this.getIndex(id);
+    this.movies.splice(index, 1);
   }
 
 }

@@ -9,3 +9,7 @@ mat-form-field{
 .custom-text{
   margin: 15px;
 }
+
+.btn-outline-secondary{
+  margin-right: 15px;
+}

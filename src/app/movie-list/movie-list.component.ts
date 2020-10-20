@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CrudService, Movie } from '../services/crud.service';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-movie-list',
@@ -9,14 +10,15 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class MovieListComponent implements OnInit {
   title = 'ArchipelCharts';
-  public movies: Movie[];
+  public movies: Observable<Movie[]>;
 
   constructor(
   private crudApi: CrudService,
   public toastr: ToastrService
   ) {}
   ngOnInit(): void {
-    this.crudApi.getMoviesList().subscribe(moviesList => this.movies = moviesList);
+    // this.crudApi.getMoviesList().subscribe(moviesList => this.movies = moviesList);
+    this.movies = this.crudApi.getMoviesList();
   }
 
   deleteMovie(movie){

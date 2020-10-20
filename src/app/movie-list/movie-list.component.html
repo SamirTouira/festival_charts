@@ -1,6 +1,6 @@
   <!-- Showing movies data -->
 <article fxLayout="row wrap" fxLayoutAlign="space-around center">
-  <ng-container *ngFor="let movie of movies">
+  <ng-container *ngFor="let movie of movies | async">
     <mat-card>
       <mat-card-title>
         {{movie.title | titlecase}}
