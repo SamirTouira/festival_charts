@@ -9,7 +9,7 @@
       <input matInput type="text" formControlName="title" placeholder="Ex : Avatar" required>
       <!-- Showing errors using getter method -->
       <mat-error *ngIf="title.touched && title.invalid" class="error"><sup>*</sup>Please enter atleast a title of movie<br/></mat-error>
-      <mat-error *ngIf="title.errors?.minlength" class="error"><sup>*</sup>Name shouldn't be less than 2 words</mat-error>
+      <mat-error *ngIf="title.errors?.minlength" class="error"><sup>*</sup>Name cannot be less than 2 words</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
@@ -18,8 +18,7 @@
       <!-- Showing errors using getter method -->
       <mat-error *ngIf="languages.touched && languages.invalid" class="error"><sup>*</sup>Please type the language of the movie</mat-error>
     </mat-form-field>
-  </article>
-
+  </article><br/>
 
   <article [formGroup]="producer" fxLayout="row" fxLayoutGap="15px" fxFlex>
     <mat-form-field appearance="outline">

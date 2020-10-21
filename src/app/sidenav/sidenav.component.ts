@@ -23,4 +23,5 @@ export class SidenavComponent implements OnDestroy {
     // tslint:disable-next-line: deprecation
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
+
 }

@@ -14,7 +14,7 @@
         <span>coucou</span>
       </mat-card-content>
       <mat-card-actions>
-        <a mat-raised-button color="primary" routerLink="/edit-movie/{{movie.id}}">Edit</a>&nbsp;
+        <a mat-raised-button color="primary" routerLink="/edit-movie/{{movie.id}}" (click)="onActivate($event)">Edit</a>&nbsp;
         <button mat-fab color="accent" (click)="deleteMovie(movie)"><mat-icon>delete</mat-icon></button>
       </mat-card-actions>
 

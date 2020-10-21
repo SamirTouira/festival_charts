@@ -62,7 +62,7 @@ export class EditMovieComponent implements OnInit {
   edit() {
     const movieIdNumber = Number(this.movieId);
     this.crudApi.updateMovie({...this.editForm.value, id: movieIdNumber});
-    this.toastr.success(this.editForm.controls['title'].value + ' successfully updated!');
+    this.toastr.success(this.editForm.controls['title'].value.toUpperCase() + ' successfully updated!');
     this.resetForm();
   }
 }
