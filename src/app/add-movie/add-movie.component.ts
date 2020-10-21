@@ -20,8 +20,11 @@ export class AddMovieComponent {
   ) {
     this.moviesForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(2)]],
-      language: new FormControl(''),
-      producer: new FormControl('')
+      languages: new FormControl(''),
+      producer: this.fb.group({
+        firstName: new FormControl(''),
+        lastName: new FormControl('')
+      })
     });
   }
 
@@ -29,8 +32,8 @@ export class AddMovieComponent {
   get title() {
     return this.moviesForm.get('title');
   }
-  get language(){
-    return this.moviesForm.get('language');
+  get languages(){
+    return this.moviesForm.get('languages');
   }
   get producer(){
     return this.moviesForm.get('producer');

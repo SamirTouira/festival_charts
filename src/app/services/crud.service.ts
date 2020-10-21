@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import {movies} from '../fake-data';
+import * as data from '../data-ter.json';
+
 
 export interface Movie {
-    id: string;
+    id: number;
     title: string;
-    language: string;
-    producer: string;
+    languages: string;
+    producer: {
+      firstName: string,
+      lastName: string
+    };
  }
 
 @Injectable({
@@ -14,39 +19,41 @@ export interface Movie {
 })
 export class CrudService {
 
-public movies = movies;
+  public movies = data.movies;
   constructor() { }
 
   addMovie(movie: Movie) {
     this.movies.push({
       id: movie.id,
       title: movie.title,
-      language: movie.language,
+      languages: movie.languages,
       producer: movie.producer
     });
   }
 
   //Get Movies List
   getMoviesList(): Observable<Movie[]> {
-    return of(movies);
+    return of(this.movies);
   }
 
-  getMovie(id: string){
+  getMovie(id: number){
     return this.movies.find(m => id === m.id);
   }
 
-  getIndex(movie: Movie){
-    return this.movies.map((m, i) => movie.id === m.id ? i : undefined).filter(ele => ele !== undefined);
+  getIndex(id){
+    return this.movies.findIndex(m => m.id === id);
   }
 
   updateMovie(movie: Movie){
-    const index = this.getIndex(movie);
-    this.movies.splice(index[index.length - 1], 1, movie);
+    const index = this.getIndex(movie.id);
+    this.movies.splice(index, 1, movie);
+    console.log(this.movies);
+    return this.movies;
   }
 
-  deleteMovieService(movie: Movie) {
-    const index = this.getIndex(movie);
-    this.movies.splice(index[index.length - 1], 1);
+  deleteMovieService(id) {
+    const index = this.getIndex(id);
+    this.movies.splice(index, 1);
   }
 
 }

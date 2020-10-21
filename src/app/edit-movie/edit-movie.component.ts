@@ -24,11 +24,15 @@ export class EditMovieComponent implements OnInit {
     private toastr: ToastrService       // Toastr service for alert message
   ){ }
   ngOnInit() {
-    const movie = this.crudApi.getMovie(this.movieId);
+    const movieIdNumber = Number(this.movieId);
+    const movie = this.crudApi.getMovie(movieIdNumber);
     this.editForm = this.fb.group({
       title: [movie.title, [Validators.required, Validators.minLength(2)]],
-      language: movie.language,
-      producer: movie.producer
+      languages: movie.languages,
+      producer: this.fb.group({
+        firstName: movie.producer.firstName,
+        lastName: movie.producer.lastName
+      })
     });
 
     this.actRoute.params.subscribe((params: Params) => {
@@ -39,8 +43,8 @@ export class EditMovieComponent implements OnInit {
   get title() {
     return this.editForm.get('title');
   }
-  get language() {
-    return this.editForm.get('language');
+  get languages() {
+    return this.editForm.get('languages');
   }
   get producer() {
     return this.editForm.get('producer');
@@ -56,8 +60,9 @@ export class EditMovieComponent implements OnInit {
     this.editForm.reset();
   }
   edit() {
-    this.crudApi.updateMovie({...this.editForm.value,id :this.movieId});
-    this.toastr.success(this.editForm.controls['title'].value + ' successfully updated!');
+    const movieIdNumber = Number(this.movieId);
+    this.crudApi.updateMovie({...this.editForm.value, id: movieIdNumber});
+    this.toastr.success(this.editForm.controls['title'].value.toUpperCase() + ' successfully updated!');
     this.resetForm();
   }
 }

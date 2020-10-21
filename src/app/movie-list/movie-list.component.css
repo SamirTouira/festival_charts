@@ -1,11 +1,3 @@
-p{
-    text-align: center;
-}
-
-p.error{
-    color: red;
-}
-
 section{
     text-align: center;
 }
@@ -17,4 +9,10 @@ table{
 
 i{
   font-size: 30px;
+}
+
+.mat-card{
+  max-width: 400px;
+  max-height: 500px;
+  margin: 20px;
 }

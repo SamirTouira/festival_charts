@@ -1,0 +1,22 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side">
+    <mat-toolbar color="primary"></mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/add-movie" routerLinkActive="active">Add a movie</a>
+      <a mat-list-item routerLink="/movie-list" routerLinkActive="active">List of movies</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content (toggle)="sidenav.toggle()">
+
+    <mat-toolbar color="primary" class="example-toolbar">
+      <button mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
+      <h1 class="example-app-name">Archipel Market Charts</h1>
+    </mat-toolbar>
+
+
+    <h2 class="custom-text">Welcome to Archipel Market !</h2>
+
+    <router-outlet></router-outlet>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

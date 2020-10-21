@@ -1,12 +1,39 @@
-p{
-    text-align: center;
+.mat-input-element {
+  caret-color: #a2691f;
 }
 
-
-p.error{
-    color: red;
+.custom-text{
+  margin: 15px;
 }
 
-div.row{
-    margin-left: 30px;
+form{
+  padding: 15px;
+}
+
+mat-form-field{
+  width: 100%;
+}
+
+td {
+  padding-right: 8px;
+}
+
+.producer-field{
+  width: 201px;
+  /* color: aqua; */
+}
+
+.global-margin{
+  margin: 15px;
+}
+
+.date-field{
+  margin-top: 30px;
+}
+.mat-input-element {
+  caret-color: #a2691f;
+}
+
+.custom-text{
+  margin: 15px;
 }
