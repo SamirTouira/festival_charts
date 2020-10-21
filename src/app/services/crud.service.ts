@@ -20,6 +20,7 @@ export interface Movie {
 export class CrudService {
 
   public movies = data.movies;
+  public users = data.users;
   constructor() { }
 
   addMovie(movie: Movie) {
@@ -35,6 +36,10 @@ export class CrudService {
   getMoviesList(): Observable<Movie[]> {
     return of(this.movies);
   }
+
+  // getUsers():Observable<Movie[]>{
+  //   return of (this.users);
+  // }
 
   getMovie(id: number){
     return this.movies.find(m => id === m.id);
