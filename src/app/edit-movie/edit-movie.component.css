@@ -13,3 +13,7 @@ mat-form-field{
 .btn-outline-secondary{
   margin-right: 15px;
 }
+
+.global-margin{
+  margin: 15px;
+}
