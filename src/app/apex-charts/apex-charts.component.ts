@@ -1,30 +1,41 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import * as data from "../data-ter.json";
 
 import {
   ChartComponent,
-  ApexAxisChartSeries,
   ApexChart,
-  ApexXAxis,
-  ApexYAxis,
-  ApexDataLabels,
+  ApexAxisChartSeries,
   ApexTitleSubtitle,
-  ApexLegend,
+  ApexDataLabels,
+  ApexFill,
+  ApexYAxis,
+  ApexXAxis,
+  ApexTooltip,
+  ApexMarkers,
+  ApexAnnotations,
   ApexStroke,
-  ApexTheme
-} from 'ng-apexcharts';
-import * as series from '../data-ter.json';
+  ApexGrid,
+  ApexTheme,
+  ApexLegend
+} from "ng-apexcharts";
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
-  xaxis: ApexXAxis;
-  yaxis: ApexYAxis;
   dataLabels: ApexDataLabels;
+  markers: ApexMarkers;
   title: ApexTitleSubtitle;
-  labels: string[];
-  legend: ApexLegend;
+  fill: ApexFill;
+  yaxis: ApexYAxis;
+  xaxis: ApexXAxis;
+  tooltip: ApexTooltip;
   stroke: ApexStroke;
-  theme: ApexTheme
+  annotations: ApexAnnotations;
+  colors: any;
+  toolbar: any;
+  grid: ApexGrid;
+  theme: ApexTheme;
+  legend: ApexLegend;
 };
 
 @Component({
@@ -36,106 +47,65 @@ export type ChartOptions = {
 
 
 export class ApexChartsComponent implements OnInit {
-  @ViewChild('chart') chart: ChartComponent;
+  @ViewChild("chart", { static: false }) chart: ChartComponent;
+
+  public users = data.users;
+  public data = [];
   public chartOptions: Partial<ChartOptions>;
 
-
   constructor() {
+    this.initChart();
+  }
+
+
+  initChart(): void {
     this.chartOptions = {
-      series: [
-        {
-          name: "STOCK ABC",
-          data: [series.users.length]
-        },
-      ],
+      series: [{
+          name: "Users",
+          data: this.getFirstConnexionNb()
+
+        }],
       chart: {
-        height: 350,
-        width: 900,
         type: "area",
-        toolbar: {
-          show: true,
-          offsetX: 0,
-          offsetY: 0,
-          tools: {
-            download: true,
-            selection: true,
-            zoom: true,
-            zoomin: true,
-            zoomout: true,
-            pan: true,
-            customIcons: []
-          },
-          export: {
-            csv: {
-              filename: undefined,
-              columnDelimiter: ',',
-              headerCategory: 'category',
-              headerValue: 'value',
-              dateFormatter(timestamp) {
-                return new Date(timestamp).toDateString()
+        height: 350
+      },
+      xaxis: {
+        type: 'datetime',
+        labels: {
+          format: 'dd/MM',
+        }
+      },
+      annotations: {
+        yaxis: [
+          {
+            y: 30,
+            borderColor: "#999",
+            label: {
+              text: "Support",
+              style: {
+                color: "#fff",
+                background: "#00E396"
               }
             }
           },
-          autoSelected: 'zoom'
-        },
+        ]
       },
       title: {
-        text: "My First Angular Chart",
+        text: "Number of first connexions users per day",
+        align: "center",
+        floating: true,
         style: {
           fontSize:  '14px',
           fontWeight:  'bold',
           fontFamily:  undefined,
-          color:  'red'
+          color:  'white'
         }
-      },
-      xaxis: {
-        type: 'category',
-        categories: ["Jan", "Feb",  "Mar",  "Apr",  "May",  "Jun",  "Jul",  "Aug", "Sep"],
-        labels: {
-          show: true,
-          rotate: -45,
-          rotateAlways: false,
-          hideOverlappingLabels: true,
-          showDuplicates: false,
-          trim: false,
-          minHeight: undefined,
-          maxHeight: 120,
-          style: {
-              colors: ['#9C27B0', '#9C27B0', '#9C27B0', '#9C27B0', '#9C27B0', '#9C27B0', '#9C27B0', '#9C27B0', '#9C27B0'],
-              fontSize: '12px',
-              fontFamily: 'Helvetica, Arial, sans-serif',
-              fontWeight: 400,
-              cssClass: 'apexcharts-xaxis-label',
-          },
-          offsetX: 0,
-          offsetY: 0,
-          format: undefined,
-          formatter: undefined,
-          datetimeUTC: true,
-          datetimeFormatter: {
-              year: 'yyyy',
-              month: "MMM 'yy",
-              day: 'dd MMM',
-              hour: 'HH:mm',
-          },
-        },
       },
       dataLabels: {
         enabled: true,
-        enabledOnSeries: undefined,
-        formatter: function (val, opts) {
-          return val
-        },
-        textAnchor: 'middle',
-        distributed: false,
-        offsetX: 0,
-        offsetY: 0,
-        style: {
-          colors: ['#26DE31', '26DEDB', '#9C27B0'],
-          fontSize: '20px',
-          fontFamily: 'Helvetica, Arial, sans-serif',
-          fontWeight: 'bold'
-        }
+      },
+      markers: {
+        size: 7
       },
       theme: {
         mode: 'dark',
@@ -143,15 +113,28 @@ export class ApexChartsComponent implements OnInit {
         monochrome: {
             enabled: true,
             color: '#255aee',
-            shadeTo: 'light',
+            shadeTo: 'dark',
             shadeIntensity: 0.65
         },
     }
     };
   }
 
+
+
   ngOnInit(){
-    // this.users = this.crudApi.getMoviesList();
-    console.log(series.users.length);
+    this.data = this.getFirstConnexionNb();
+  }
+
+  getFirstConnexionNb() {
+    const firstCoData = [];
+    const firstDay = new Date('2020-10-01');
+    const lastDay = new Date('2020-10-10');
+    for (const d = firstDay; d <= lastDay; d.setDate(d.getDate() + 1)) {
+      const nbConnexion = this.users.filter(u => new Date(u.firstConnexion).toDateString() === d.toDateString());
+      console.log(firstCoData);
+      firstCoData.push({x: new Date(d), y: nbConnexion.length});
+    }
+    return firstCoData;
   }
 }

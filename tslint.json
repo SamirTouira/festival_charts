@@ -64,10 +64,6 @@
       true,
       "as-needed"
     ],
-    "quotemark": [
-      true,
-      "single"
-    ],
     "semicolon": {
       "options": [
         "always"
@@ -125,7 +121,7 @@
     "contextual-lifecycle": true,
     "directive-class-suffix": true,
     "no-conflicting-lifecycle": true,
-    "no-host-metadata-property": false,
+    "no-host-metadata-property": true,
     "no-input-rename": true,
     "no-inputs-metadata-property": true,
     "no-output-native": true,

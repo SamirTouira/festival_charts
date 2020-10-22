@@ -37,12 +37,12 @@ export class CrudService {
     return of(this.movies);
   }
 
-  // getUsers():Observable<Movie[]>{
-  //   return of (this.users);
-  // }
-
   getMovie(id: number){
     return this.movies.find(m => id === m.id);
+  }
+
+  getUser(id){
+    return this.users.find(u => id === u.id);
   }
 
   getIndex(id){

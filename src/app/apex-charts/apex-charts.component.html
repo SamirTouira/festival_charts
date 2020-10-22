@@ -1,15 +1,21 @@
-<p>apex-charts works!</p>
+<section>
 
-<div style="text-align:center; margin: 15px;">
-  <apx-chart
-    [series]="chartOptions.series"
-    [chart]="chartOptions.chart"
-    [xaxis]="chartOptions.xaxis"
-    [title]="chartOptions.title"
-    [dataLabels]="chartOptions.dataLabels"
-    [labels]="chartOptions.labels"
-    [theme]="chartOptions.theme"
-  ></apx-chart>
-</div>
+<apx-chart
+  #chart
+  [title]="chartOptions.title"
+  [series]="chartOptions.series"
+  [chart]="chartOptions.chart"
+  [colors]="chartOptions.colors"
+  [yaxis]="chartOptions.yaxis"
+  [dataLabels]="chartOptions.dataLabels"
+  [markers]="chartOptions.markers"
+  [stroke]="chartOptions.stroke"
+  [grid]="chartOptions.grid"
+  [xaxis]="chartOptions.xaxis"
+  [tooltip]="chartOptions.tooltip"
+  [annotations]="chartOptions.annotations"
+  [theme]="chartOptions.theme"
+  [legend]="chartOptions.legend"
+></apx-chart>
 
-<!-- <span *ngFor="let user of users">number of connexions per day : {{</span> -->
+</section>
