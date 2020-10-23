@@ -63,7 +63,6 @@ export class ApexChartsComponent implements OnInit {
       series: [{
           name: "Users",
           data: this.getFirstConnexionNb()
-
         }],
       chart: {
         type: "area",
