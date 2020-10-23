@@ -67,7 +67,8 @@ export class ApexChartsComponent implements OnInit {
         }],
       chart: {
         type: "area",
-        height: 350
+        height: 350,
+        width: 950
       },
       xaxis: {
         type: 'datetime',
@@ -109,7 +110,7 @@ export class ApexChartsComponent implements OnInit {
       },
       theme: {
         mode: 'dark',
-        palette: 'palette1',
+        palette: 'palette2',
         monochrome: {
             enabled: true,
             color: '#255aee',
