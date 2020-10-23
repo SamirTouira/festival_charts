@@ -20,6 +20,7 @@ export interface Movie {
 export class CrudService {
 
   public movies = data.movies;
+  public users = data.users;
   constructor() { }
 
   addMovie(movie: Movie) {
@@ -38,6 +39,10 @@ export class CrudService {
 
   getMovie(id: number){
     return this.movies.find(m => id === m.id);
+  }
+
+  getUser(id){
+    return this.users.find(u => id === u.id);
   }
 
   getIndex(id){

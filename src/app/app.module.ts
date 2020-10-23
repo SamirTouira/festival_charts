@@ -28,12 +28,15 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { ApexChartsComponent } from './apex-charts/apex-charts.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/movie-list', pathMatch: 'full' },
   { path: 'add-movie', component: AddMovieComponent },
   { path: 'movie-list', component: MovieListComponent },
-  { path: 'edit-movie/:id', component: EditMovieComponent }
+  { path: 'edit-movie/:id', component: EditMovieComponent },
+  { path: 'apex-charts', component: ApexChartsComponent }
 ];
 
 
@@ -45,6 +48,7 @@ const routes: Routes = [
     AddMovieComponent,
     TrucalaconComponent,
     SidenavComponent,
+    ApexChartsComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,6 +63,7 @@ const routes: Routes = [
     MatTooltipModule,
     MatListModule,
     MatIconModule,
+    NgApexchartsModule,
     // environment.production ? [] : AkitaNgDevtools.forRoot(),
     // AkitaNgRouterStoreModule.forRoot(),
     FormsModule,
