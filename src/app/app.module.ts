@@ -30,13 +30,15 @@ import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { ApexChartsComponent } from './apex-charts/apex-charts.component';
+import { GraphicUsersComponent } from './graphic-users/graphic-users.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/movie-list', pathMatch: 'full' },
   { path: 'add-movie', component: AddMovieComponent },
   { path: 'movie-list', component: MovieListComponent },
   { path: 'edit-movie/:id', component: EditMovieComponent },
-  { path: 'apex-charts', component: ApexChartsComponent }
+  { path: 'apex-charts', component: ApexChartsComponent },
+  { path: 'graphic-users', component: GraphicUsersComponent }
 ];
 
 
@@ -49,6 +51,7 @@ const routes: Routes = [
     TrucalaconComponent,
     SidenavComponent,
     ApexChartsComponent,
+    GraphicUsersComponent,
   ],
   imports: [
     BrowserModule,

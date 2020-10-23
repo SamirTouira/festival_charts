@@ -39,30 +39,31 @@ export type ChartOptions = {
 };
 
 @Component({
-  selector: 'app-apex-charts',
-  templateUrl: './apex-charts.component.html',
-  styleUrls: ['./apex-charts.component.css']
+  selector: 'app-graphic-users',
+  templateUrl: './graphic-users.component.html',
+  styleUrls: ['./graphic-users.component.css']
 })
-
-
-
-export class ApexChartsComponent implements OnInit {
-  @ViewChild("chart", { static: false }) chart: ChartComponent;
+export class GraphicUsersComponent implements OnInit {
+@ViewChild("chart", { static: false }) chart: ChartComponent;
 
   public users = data.users;
   public data = [];
   public chartOptions: Partial<ChartOptions>;
+  public connexionsData = [];
 
   constructor() {
     this.initChart();
-  }
+   }
 
+  ngOnInit(): void {
+    this.connexionsPerDay();
+  }
 
   initChart(): void {
     this.chartOptions = {
       series: [{
           name: "Users",
-          data: this.getFirstConnexionNb()
+          data: this.connexionsData
         }],
       chart: {
         type: "area",
@@ -91,7 +92,7 @@ export class ApexChartsComponent implements OnInit {
         ]
       },
       title: {
-        text: "Number of first connexions users per day",
+        text: "Number of connected users per day",
         align: "center",
         floating: true,
         style: {
@@ -120,22 +121,29 @@ export class ApexChartsComponent implements OnInit {
     };
   }
 
+  connexionsPerDay() {
 
-
-  ngOnInit(){
-    this.data = this.getFirstConnexionNb();
-  }
-
-  getFirstConnexionNb() {
-    const firstCoData = [];
+    // Creation of an empty array
+    const allArray = [];
+    // Setting up the date between 1 and 30 October from fake data
     const firstDay = new Date('2020-10-01');
-    const lastDay = new Date('2020-10-10');
+    const lastDay = new Date('2020-10-31');
+    // Initialize number of users connexion
+    let nbConnexion = 0;
+    // Loop all users to get all the connexions array data
+    this.users.map(u => allArray.push(u.connexions));
+    // Flat on the all arrays to get one array with all dates
+    const group = allArray.reduce((hello, world) => hello.concat(world), []);
+    // Loop the dates inside the array [connexions] to get the number of connexions users in the same day
     for (const d = firstDay; d <= lastDay; d.setDate(d.getDate() + 1)) {
-      const nbConnexion = this.users.filter(u => new Date(u.firstConnexion).toDateString() === d.toDateString());
-      console.log(firstCoData);
-      firstCoData.push({x: new Date(d), y: nbConnexion.length});
+      nbConnexion = group.filter(date => new Date(date).toDateString() === d.toDateString()).length;
+
+      this.connexionsData.push({x: new Date(d), y: nbConnexion});
+      console.log(this.connexionsData);
+
     }
-    // console.log(firstCoData);
-    return firstCoData;
+    // Render this function
+    return this.connexionsData;
   }
+
 }
