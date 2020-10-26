@@ -32,6 +32,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { ApexChartsComponent } from './apex-charts/apex-charts.component';
 import { GraphicUsersComponent } from './graphic-users/graphic-users.component';
 import { GraphicScreeningsComponent } from './graphic-screenings/graphic-screenings.component';
+import { ScreeningsChartComponent } from './screenings-chart/screenings-chart.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/movie-list', pathMatch: 'full' },
@@ -40,7 +41,8 @@ const routes: Routes = [
   { path: 'edit-movie/:id', component: EditMovieComponent },
   { path: 'apex-charts', component: ApexChartsComponent },
   { path: 'graphic-users', component: GraphicUsersComponent },
-  { path: 'graphic-screenings', component: GraphicScreeningsComponent }
+  { path: 'graphic-screenings', component: GraphicScreeningsComponent },
+  { path: 'screenings-chart', component: ScreeningsChartComponent }
 ];
 
 
@@ -55,6 +57,7 @@ const routes: Routes = [
     ApexChartsComponent,
     GraphicUsersComponent,
     GraphicScreeningsComponent,
+    ScreeningsChartComponent,
   ],
   imports: [
     BrowserModule,

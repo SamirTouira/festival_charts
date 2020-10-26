@@ -47,10 +47,10 @@ export type ChartOptions = {
 export class GraphicScreeningsComponent implements OnInit {
   @ViewChild("chart", { static: false }) chart: ChartComponent;
 
+  public chartOptions: Partial<ChartOptions>;
   public users = data.users;
   public screenings = data.screenings;
   public data = [];
-  public chartOptions: Partial<ChartOptions>;
   public connexionsData = [];
   public screeningsData = [];
 
@@ -159,7 +159,7 @@ export class GraphicScreeningsComponent implements OnInit {
   }
 
   getWeekNumber(){
-    const today = new Date();
+    const today = new Date("2020-11-02");
     const firstDayOfYear = new Date(today.getFullYear(), 0, 1);
     const pastDaysOfYear = (today.getTime() - firstDayOfYear.getTime()) / 86400000;
     const test = Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
