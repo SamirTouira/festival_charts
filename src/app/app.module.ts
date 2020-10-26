@@ -31,6 +31,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { ApexChartsComponent } from './apex-charts/apex-charts.component';
 import { GraphicUsersComponent } from './graphic-users/graphic-users.component';
+import { GraphicScreeningsComponent } from './graphic-screenings/graphic-screenings.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/movie-list', pathMatch: 'full' },
@@ -38,7 +39,8 @@ const routes: Routes = [
   { path: 'movie-list', component: MovieListComponent },
   { path: 'edit-movie/:id', component: EditMovieComponent },
   { path: 'apex-charts', component: ApexChartsComponent },
-  { path: 'graphic-users', component: GraphicUsersComponent }
+  { path: 'graphic-users', component: GraphicUsersComponent },
+  { path: 'graphic-screenings', component: GraphicScreeningsComponent }
 ];
 
 
@@ -52,6 +54,7 @@ const routes: Routes = [
     SidenavComponent,
     ApexChartsComponent,
     GraphicUsersComponent,
+    GraphicScreeningsComponent,
   ],
   imports: [
     BrowserModule,
