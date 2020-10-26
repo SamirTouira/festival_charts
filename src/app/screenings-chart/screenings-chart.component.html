@@ -1,7 +1,9 @@
 <p>screenings-chart works!</p>
+<section>
 <div id="chart">
   <apx-chart
     [series]="chartOptions.series"
+    [title]="chartOptions.title"
     [theme]="chartOptions.theme"
     [markers]="chartOptions.markers"
     [chart]="chartOptions.chart"
@@ -15,3 +17,5 @@
     [xaxis]="chartOptions.xaxis"
   ></apx-chart>
 </div>
+
+</section>
