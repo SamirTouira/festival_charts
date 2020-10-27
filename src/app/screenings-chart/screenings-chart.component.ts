@@ -17,7 +17,6 @@ import {
   ApexTitleSubtitle
 } from "ng-apexcharts";
 
-
 export type ChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -65,6 +64,7 @@ export class ScreeningsChartComponent implements OnInit {
             shadeIntensity: 0.65
         },
       },
+
       title: {
         text: "Number of screenings per week",
         align: "center",
@@ -89,7 +89,7 @@ export class ScreeningsChartComponent implements OnInit {
         }
       },
       dataLabels: {
-        enabled: false
+        enabled: false,
       },
       stroke: {
         show: true,
@@ -97,21 +97,15 @@ export class ScreeningsChartComponent implements OnInit {
         colors: ["transparent"]
       },
       xaxis: {
-        categories: [
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct"
-        ],
-        type: 'datetime',
         labels: {
-          format: 'dd/MM',
-        }
+          show: true,
+          rotate: -20,
+          rotateAlways: true,
+          datetimeFormatter:{
+            day: 'dd MMM'
+          }
+        },
+        offsetX: 15
       },
       yaxis: {
         title: {
@@ -133,105 +127,51 @@ export class ScreeningsChartComponent implements OnInit {
 
   ngOnInit(): void {
     this.screeningsPerWeek();
-
-    // this.getFirstMonday();
-    // this.getDateOfWeek('40', '2020');
   }
 
   screeningsPerWeek() {
-
-    // Creation of an empty array
-    // const allScreenings = [];
-    // const startDateArray = [];
-    // Setting up the date between 1 and 30 October from fake data
-    // const firstDate = this.getWeekNumber('2020-10-01');
-    // const lastDate = this.getWeekNumber('2020-10-31');
-
-    // let nbScreenings = 0;
-    // let nbScreeningSurCetteSemaine = 0;
-
-    // this.screenings.map(u => allScreenings.push(this.getWeekNumber(u.start)));
-    // console.log('all screenings : ', allScreenings);
-
-
-    // for (const d =  firstDay; d <= lastDay; d.setDate(d.getDate() + 1)) {
-      //   nbScreenings = group.filter(date => new Date(date).toDateString() === d.toDateString()).length;
-
-      //   this.screeningsData.push({x: new Date(d), y: nbScreenings});
-      //   // console.log(nbScreenings);
-      //   // console.log(this.getWeekNumber('2020-10-01'));
-      //   this.screenings.map(s => startDateArray.push(s.start));
-      //   console.log(groupStartDate);
-    // console.log(firstDate);
-    // console.log(lastDate);
-    // for (let e = firstDate; e <= lastDate; e++){
-    //   nbScreenings = allScreenings.filter(screen => screen === e).length;
-    //   console.log(e, ' : ', nbScreenings);
-    // }
-    // console.log('date : ', this.getWeekNumber("2020-10-03"))
-
-      // }
-    // return this.screeningsData;
-
-        // Creation of an empty array
-        const allArray = [];
-        // Setting up the date between 1 and 30 October from fake data
-        const firstDay = new Date('2020-10-01');
-        const lastDay = new Date('2020-10-31');
-        // Initialize number of users connexion
-        let nbScreenings = 0;
-        // Loop all users to get all the connexions array data
-        this.screenings.map(u => allArray.push(u.start));
-        // console.log(this.screenings);
-        // Flat on the all arrays to get one array with all dates
-        const group = allArray.reduce((firstArray, secondArray) => firstArray.concat(secondArray), []);
-        // Loop the dates inside the array [connexions] to get the number of connexions users in the same day
-        for (const d = firstDay; d <= lastDay; d.setDate(d.getDate() + 1)) {
-          nbScreenings = group.filter(date => new Date(date).toDateString() === d.toDateString()).length;
-
-          this.screeningsData.push({x: new Date(d), y: Math.floor(nbScreenings)});
-          // console.log(nbScreenings);
-
-        }
-        // Render this function
-        return this.screeningsData;
-    // Render this function
+    // Creation of an empty array for all screenings and get the currently date
+    const today = new Date();
+    const allScreenings = [];
+    // Setting up the date between 1 and 30 October from fake data and get weeks number with getWeekNumber()
+    const firstDate = this.getWeekNumber('2020-10-01');
+    const lastDate = this.getWeekNumber('2020-10-31');
+    // Initialization of the number of screenings for the loop for()
+    let nbScreenings = 0;
+    // Pushing the empty array allScreenings to the array start from fake datas screenings.start and get the number of week about this
+    this.screenings.map(u => allScreenings.push(this.getWeekNumber(u.start)));
+    // Initialization of the loop to browse the interval between number of weeks, filtering and pushing inside screenings data
+    for (let e = firstDate; e <= lastDate; e++){
+      nbScreenings = allScreenings.filter(screen => screen === e).length;
+      this.screeningsData.push({x: this.getFirstAndLastDay(e, today.getFullYear()), y: nbScreenings});
+    }
+    return this.screeningsData;
   }
 
-  isValidDate(d) {
-    return d instanceof Date && !isNaN(d.getDate());
+  getFirstAndLastDay(weekNumber: number, year: number){
+    const firstDayOfYear = new Date(year, 0, 1).getDay();
+    const d = new Date(year, 0, 1);
+    const w = d.getTime() - (3600000 * 24 * (firstDayOfYear -1)) + 604800000 * (weekNumber - 1);
+    const firstDay = new Date(w);
+    const lastDay = new Date(w + 518400000);
+
+    return `${firstDay.getDate()}/${firstDay.getMonth() + 1} - ${lastDay.getDate()}/${lastDay.getMonth() + 1}`;
   }
 
   getDateOfWeek(year, week, day){
     const firstDayOfYear = new Date(year, 0, 1);
     const days = 2 + day + (week - 1) * 7 - firstDayOfYear.getDay();
-    // console.log(days);
+
     return new Date(year, 0, days);
   }
 
-  getWeekNumber(dateScreeningWeek: any) { // peut-être un type Date plutôt que string
+  getWeekNumber(dateScreeningWeek: any) { // I've typed any, but it can be also the type string
     const today = new Date(dateScreeningWeek);
     const firstDayOfYear = new Date(today.getFullYear(), 0, 1);
     const pastDaysOfYear = (today.getTime() - firstDayOfYear.getTime()) / 86400000;
-    console.log('firstDayOfYear : ', firstDayOfYear);
-    console.log('pasDayOfYear : ', pastDaysOfYear);
-    const firstMondayOfTheYear = 2;
-    const test = Math.ceil((pastDaysOfYear + firstDayOfYear.getDay()) / 7);
-    console.log(firstDayOfYear.getDay())
-    // console.log(test);
-    return test;
-  }
+    const resultWeekNumber = Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 2) / 7);
 
-  getFirstMonday(){
-    console.log(new Date().getDate());
-    const year = new Date().getFullYear();
-    // récupère l'année
-    // récupérer le 1e jours de l'année
-    const firstDayOfYear = new Date(year, 0, 1);
-    if(firstDayOfYear.getDay() !== 1) {
-
-    }
-    console.log(firstDayOfYear.getDay())
+    return resultWeekNumber;
   }
 
 }
