@@ -1,42 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChartOptions, globalOptions } from "../chart-options";
+import { ChartComponent } from "ng-apexcharts";
 import * as data from "../data-ter.json";
-
-import {
-  ChartComponent,
-  ApexChart,
-  ApexAxisChartSeries,
-  ApexTitleSubtitle,
-  ApexDataLabels,
-  ApexFill,
-  ApexYAxis,
-  ApexXAxis,
-  ApexTooltip,
-  ApexMarkers,
-  ApexAnnotations,
-  ApexStroke,
-  ApexGrid,
-  ApexTheme,
-  ApexLegend
-} from "ng-apexcharts";
-
-export type ChartOptions = {
-  series: ApexAxisChartSeries;
-  chart: ApexChart;
-  dataLabels: ApexDataLabels;
-  markers: ApexMarkers;
-  title: ApexTitleSubtitle;
-  fill: ApexFill;
-  yaxis: ApexYAxis;
-  xaxis: ApexXAxis;
-  tooltip: ApexTooltip;
-  stroke: ApexStroke;
-  annotations: ApexAnnotations;
-  colors: any;
-  toolbar: any;
-  grid: ApexGrid;
-  theme: ApexTheme;
-  legend: ApexLegend;
-};
 
 @Component({
   selector: 'app-graphic-users',
@@ -61,14 +26,15 @@ export class GraphicUsersComponent implements OnInit {
 
   initChart(): void {
     this.chartOptions = {
+      ...globalOptions,
       series: [{
           name: "Users",
           data: this.connexionsData
         }],
+
       chart: {
         type: "area",
-        height: 350,
-        width: 950
+        ...globalOptions.chart
       },
       xaxis: {
         type: 'datetime',
@@ -102,22 +68,6 @@ export class GraphicUsersComponent implements OnInit {
           color:  'white'
         }
       },
-      dataLabels: {
-        enabled: true,
-      },
-      markers: {
-        size: 7
-      },
-      theme: {
-        mode: 'dark',
-        palette: 'palette2',
-        monochrome: {
-            enabled: true,
-            color: '#255aee',
-            shadeTo: 'dark',
-            shadeIntensity: 0.65
-        },
-    }
     };
   }
 

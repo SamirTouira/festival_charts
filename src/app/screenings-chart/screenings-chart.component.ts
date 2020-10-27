@@ -1,37 +1,8 @@
 import { Component, ViewChild, OnInit } from "@angular/core";
+import { ChartOptions, globalOptions } from "../chart-options";
+import { ChartComponent } from "ng-apexcharts";
 import * as data from "../data-ter.json";
-import {
-  ApexAxisChartSeries,
-  ApexChart,
-  ChartComponent,
-  ApexDataLabels,
-  ApexPlotOptions,
-  ApexYAxis,
-  ApexLegend,
-  ApexStroke,
-  ApexXAxis,
-  ApexFill,
-  ApexTooltip,
-  ApexTheme,
-  ApexMarkers,
-  ApexTitleSubtitle
-} from "ng-apexcharts";
 
-export type ChartOptions = {
-  series: ApexAxisChartSeries;
-  chart: ApexChart;
-  dataLabels: ApexDataLabels;
-  plotOptions: ApexPlotOptions;
-  yaxis: ApexYAxis;
-  xaxis: ApexXAxis;
-  fill: ApexFill;
-  tooltip: ApexTooltip;
-  stroke: ApexStroke;
-  legend: ApexLegend;
-  theme: ApexTheme;
-  markers: ApexMarkers;
-  title: ApexTitleSubtitle;
-};
 
 @Component({
   selector: 'app-screenings-chart',
@@ -50,21 +21,11 @@ export class ScreeningsChartComponent implements OnInit {
 
   constructor() {
     this.chartOptions = {
+      ...globalOptions,
       series: [{
         name: "Screenings",
         data: this.screeningsData
       }],
-      theme: {
-        mode: 'dark',
-        palette: 'palette1',
-        monochrome: {
-            enabled: true,
-            color: '#DF6D14',
-            shadeTo: 'dark',
-            shadeIntensity: 0.65
-        },
-      },
-
       title: {
         text: "Number of screenings per week",
         align: "center",
@@ -78,23 +39,8 @@ export class ScreeningsChartComponent implements OnInit {
       },
       chart: {
         type: "bar",
-        height: 350,
-        width: 950
-      },
-      plotOptions: {
-        bar: {
-          horizontal: false,
-          columnWidth: "55%",
-          endingShape: "rounded"
-        }
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      stroke: {
-        show: true,
-        width: 2,
-        colors: ["transparent"]
+
+        ...globalOptions.chart,
       },
       xaxis: {
         labels: {
@@ -105,16 +51,18 @@ export class ScreeningsChartComponent implements OnInit {
             day: 'dd MMM'
           }
         },
-        offsetX: 15
+        offsetX: 15,
+        title:{
+          text: "Weeks",
+          offsetX: -40
+        }
       },
       yaxis: {
         title: {
           text: "Screenings number"
         }
       },
-      fill: {
-        opacity: 1
-      },
+
       tooltip: {
         y: {
           formatter: function(val) {
