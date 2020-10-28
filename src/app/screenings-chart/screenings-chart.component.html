@@ -1,20 +1,15 @@
 <p>screenings-chart works!</p>
 <section>
-<div id="chart">
   <apx-chart
+    #chart
     [series]="chartOptions.series"
     [title]="chartOptions.title"
     [theme]="chartOptions.theme"
-    [markers]="chartOptions.markers"
     [chart]="chartOptions.chart"
     [dataLabels]="chartOptions.dataLabels"
     [plotOptions]="chartOptions.plotOptions"
     [yaxis]="chartOptions.yaxis"
-    [legend]="chartOptions.legend"
-    [fill]="chartOptions.fill"
     [tooltip]="chartOptions.tooltip"
     [xaxis]="chartOptions.xaxis"
   ></apx-chart>
-</div>
-
 </section>

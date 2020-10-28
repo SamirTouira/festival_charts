@@ -48,8 +48,9 @@ export class ScreeningsChartComponent implements OnInit {
           rotate: -20,
           rotateAlways: true,
           datetimeFormatter:{
-            day: 'dd MMM'
-          }
+            day: 'dd MMM',
+          },
+          offsetY: 10
         },
         offsetX: 15,
         title:{
@@ -62,7 +63,14 @@ export class ScreeningsChartComponent implements OnInit {
           text: "Screenings number"
         }
       },
-
+      plotOptions: {
+        bar: {
+          horizontal: false,
+          columnWidth: "55%",
+          startingShape: "flat",
+          endingShape: "flat"
+        }
+      },
       tooltip: {
         y: {
           formatter: function(val) {

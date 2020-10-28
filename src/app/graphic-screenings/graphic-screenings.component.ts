@@ -26,7 +26,6 @@ export class GraphicScreeningsComponent implements OnInit {
 
   ngOnInit(): void {
     this.screeningsPerWeek();
-    this.getWeekNumber();
   }
 
   initChart(): void {
@@ -47,16 +46,23 @@ export class GraphicScreeningsComponent implements OnInit {
         }
       },
       yaxis: {
-        forceNiceScale: true,
+        forceNiceScale: false,
         labels: {
           show: true,
-          align: 'right'
+          formatter: function(val)
+          { return val + '' },
+          style: {
+            colors: "",
+            fontSize: '12px',
+            fontFamily: 'Helvetica, Arial, sans-serif',
+            fontWeight: 'bold',
+            cssClass: 'apexcharts-yaxis-label',
+         },
         },
       },
       annotations: {
         yaxis: [
           {
-            y: 30,
             borderColor: "#999",
             label: {
               text: "Support",
@@ -68,6 +74,13 @@ export class GraphicScreeningsComponent implements OnInit {
           },
         ]
       },
+      tooltip: {
+        y: {
+          formatter: function(val) {
+            return val + " screenings";
+          }
+        }
+      },
       title: {
         text: "Number of screenings per day",
         align: "center",
@@ -75,7 +88,7 @@ export class GraphicScreeningsComponent implements OnInit {
         style: {
           fontSize:  '14px',
           fontWeight:  'bold',
-          fontFamily:  undefined,
+          fontFamily:  "undefined",
           color:  'white'
         }
       },
@@ -93,7 +106,6 @@ export class GraphicScreeningsComponent implements OnInit {
     let nbScreenings = 0;
     // Loop all users to get all the connexions array data
     this.screenings.map(u => allArray.push(u.start));
-    // console.log(this.screenings);
     // Flat on the all arrays to get one array with all dates
     const group = allArray.reduce((firstArray, secondArray) => firstArray.concat(secondArray), []);
     // Loop the dates inside the array [connexions] to get the number of connexions users in the same day
@@ -101,20 +113,11 @@ export class GraphicScreeningsComponent implements OnInit {
       nbScreenings = group.filter(date => new Date(date).toDateString() === d.toDateString()).length;
 
       this.screeningsData.push({x: new Date(d), y: Math.floor(nbScreenings)});
-      // console.log(nbScreenings);
-
     }
     // Render this function
     return this.screeningsData;
   }
 
-  getWeekNumber(){
-    const today = new Date("2020-11-02");
-    const firstDayOfYear = new Date(today.getFullYear(), 0, 1);
-    const pastDaysOfYear = (today.getTime() - firstDayOfYear.getTime()) / 86400000;
-    const test = Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
-    console.log(test);
-  }
 
 
 }

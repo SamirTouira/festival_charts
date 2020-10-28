@@ -60,7 +60,7 @@ export const globalOptions: Partial<ChartOptions> = {
     show: true,
     curve: 'smooth',
     lineCap: 'butt',
-    colors: undefined,
+    colors: ["green"],
     width: 2,
     dashArray: 0,
 },

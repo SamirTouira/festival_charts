@@ -84,7 +84,6 @@ export class ApexChartsComponent implements OnInit {
       console.log(firstCoData);
       firstCoData.push({x: new Date(d), y: nbConnexion.length});
     }
-    // console.log(firstCoData);
     return firstCoData;
   }
 }
