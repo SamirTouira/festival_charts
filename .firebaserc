@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "blockframes-samir": {
+      "hosting": {
+        "ArchipelCharts": [
+          "blockframes-samir"
+        ]
+      }
+    }
+  }
+}

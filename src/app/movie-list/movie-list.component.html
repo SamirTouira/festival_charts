@@ -3,22 +3,25 @@
   <ng-container *ngFor="let movie of movies | async">
     <mat-card>
       <mat-card-title>
-        {{movie.title | titlecase}}
+        {{movie.title.international | titlecase}}
       </mat-card-title>
+      <mat-card-subtitle>
+        {{movie.directors.length}}
+        {{movie.storeConfig.status}}
+      </mat-card-subtitle>
       <mat-card-content>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse iaculis lectus malesuada, condimentum enim at, accumsan turpis. Sed quis velit a sapien luctus pretium.
-          Mauris facilisis neque velit. Maecenas eget ipsum ultricies, imperdiet ipsum id, euismod erat.
-          Phasellus eget odio eget enim porttitor placerat eu non justo. In efficitur mollis dolor eget accumsan. Sed sed viverra odio. Donec iaculis, magna vel maximus dignissim, turpis nisl varius lacus, eu faucibus enim arcu sit amet elit.
+          {{movie.synopsis}}
         </p>
-        <span>coucou</span>
+
       </mat-card-content>
       <mat-card-actions>
         <a mat-raised-button color="primary" routerLink="/edit-movie/{{movie.id}}" (click)="onActivate($event)">Edit</a>&nbsp;
+        <a mat-raised-button color="primary" routerLink="/movie-detail/{{movie.id}}">See</a>
         <button mat-fab color="accent" (click)="deleteMovie(movie)"><mat-icon>delete</mat-icon></button>
       </mat-card-actions>
 
-      <mat-card-footer>By {{movie.producer.firstName}} {{movie.producer.lastName}}</mat-card-footer>
+      <!-- <mat-card-footer>By {{movie.producer.firstName}} {{movie.producer.lastName}}</mat-card-footer> -->
     </mat-card>
   </ng-container>
 </article>

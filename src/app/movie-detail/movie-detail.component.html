@@ -1,0 +1,24 @@
+<p>movie-detail works!</p>
+  <!-- Showing movies data -->
+  <article fxLayout="row wrap" fxLayoutAlign="space-around center">
+    <ng-container *ngIf=" movie | async as movie">
+      <mat-card>
+        <mat-card-title *ngIf="movie.title.international">
+          {{movie.title.international | titlecase}}
+        </mat-card-title>
+        <mat-card-subtitle>
+          <span *ngFor="let director of movie.directors; let isLast = last">
+            {{director.firstName}} {{isLast ? '' : ','}}
+          </span>
+        </mat-card-subtitle>
+        <mat-card-content>
+          <p *ngIf="movie.synopsis">
+            {{movie.synopsis}}
+          </p>
+
+        </mat-card-content>
+
+      </mat-card>
+      <!-- {{movie | async | json}} -->
+    </ng-container>
+  </article>

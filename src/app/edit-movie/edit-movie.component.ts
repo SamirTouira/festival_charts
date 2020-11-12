@@ -22,18 +22,28 @@ export class EditMovieComponent implements OnInit {
     private actRoute: ActivatedRoute,   // Activated route to get the current component's information
     private router: Router,             // Router service to navigate to specific component
     private toastr: ToastrService       // Toastr service for alert message
-  ){ }
-  ngOnInit() {
-    const movieIdNumber = Number(this.movieId);
-    const movie = this.crudApi.getMovie(movieIdNumber);
+  ){
     this.editForm = this.fb.group({
-      title: [movie.title, [Validators.required, Validators.minLength(2)]],
-      languages: movie.languages,
-      producer: this.fb.group({
-        firstName: movie.producer.firstName,
-        lastName: movie.producer.lastName
+      // title: ['', [Validators.required, Validators.minLength(2)]],
+      title: this.fb.group({
+        international: '',
+        original: new FormControl('')
+      }),
+      synopsis: '',
+      // languages: new FormControl(''),
+      directors: this.fb.group({
+        firstName: new FormControl(''),
+        lastName: new FormControl('')
+      }),
+      storeConfig: this.fb.group({
+        status: ''
       })
     });
+   }
+  ngOnInit() {
+    const movieIdNumber = this.movieId;
+    const movie = this.crudApi.getMovie(movieIdNumber);
+
 
     this.actRoute.params.subscribe((params: Params) => {
       this.movieId = params['id'];
@@ -43,11 +53,15 @@ export class EditMovieComponent implements OnInit {
   get title() {
     return this.editForm.get('title');
   }
-  get languages() {
-    return this.editForm.get('languages');
+  get synopsis(){
+    return this.editForm.get('synopsis');
   }
-  get producer() {
-    return this.editForm.get('producer');
+  get directors(){
+    return this.editForm.get('directors');
+  }
+
+  get storeConfig(){
+    return this.editForm.get('storeConfig');
   }
 
   // Go back to previous component
@@ -60,9 +74,9 @@ export class EditMovieComponent implements OnInit {
     this.editForm.reset();
   }
   edit() {
-    const movieIdNumber = Number(this.movieId);
+    const movieIdNumber = this.movieId;
     this.crudApi.updateMovie({...this.editForm.value, id: movieIdNumber});
-    this.toastr.success(this.editForm.controls['title'].value.toUpperCase() + ' successfully updated!');
+    this.toastr.success(this.editForm.controls['title'].value.international.toUpperCase() + ' successfully updated!');
     this.resetForm();
   }
 }
