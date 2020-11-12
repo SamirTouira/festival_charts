@@ -36,8 +36,6 @@ export class MovieListComponent implements OnInit {
     this.movies = this.crudApi.getMoviesList();
   }
 
-
-
   deleteMovie(movie){
     if (window.confirm('Are sure you want to delete this movie ?')) { // Asking from user before Deleting student data.
       this.crudApi.deleteMovieService(movie.id); // Using Delete movie API to delete movie.
@@ -57,16 +55,7 @@ export class MovieListComponent implements OnInit {
     }, 2);
     const movieIdNumber = String(this.movieId);
     const movie = this.crudApi.getMovie(movieIdNumber);
-    // this.editForm = this.fb.group({
-    //   title: [movie.title.international, [Validators.required, Validators.minLength(2)]],
-    //   languages: movie.languages,
-    //   producer: this.fb.group({
-    //     firstName: movie.producer.firstName,
-    //     lastName: movie.producer.lastName
-    //   })
-    // });
     this.editForm = this.fb.group({
-      // title: ['', [Validators.required, Validators.minLength(2)]],
       title: this.fb.group({
         international: new FormControl(''),
         original: new FormControl('')
@@ -82,7 +71,5 @@ export class MovieListComponent implements OnInit {
       })
     });
     // window.location.replace('edit-movie/' + this.movieId);
-
-}
-
+  }
 }
