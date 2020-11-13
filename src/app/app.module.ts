@@ -18,7 +18,6 @@ import { AppComponent } from './app.component';
 import { NG_ENTITY_SERVICE_CONFIG } from '@datorama/akita-ng-entity-service';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools'; // à laisser pour le moment
 import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store'; // à laisser pour le moment
-import { environment } from '../environments/environment'; // à laisser pour le moment
 import { EditMovieComponent } from './edit-movie/edit-movie.component';
 import { MovieListComponent } from './movie-list/movie-list.component';
 import { AddMovieComponent } from './add-movie/add-movie.component';
@@ -34,6 +33,11 @@ import { GraphicUsersComponent } from './graphic-users/graphic-users.component';
 import { GraphicScreeningsComponent } from './graphic-screenings/graphic-screenings.component';
 import { ScreeningsChartComponent } from './screenings-chart/screenings-chart.component';
 
+import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { MovieDetailComponent } from './movie-detail/movie-detail.component';
+
 const routes: Routes = [
   { path: '', redirectTo: '/movie-list', pathMatch: 'full' },
   { path: 'add-movie', component: AddMovieComponent },
@@ -42,7 +46,8 @@ const routes: Routes = [
   { path: 'apex-charts', component: ApexChartsComponent },
   { path: 'graphic-users', component: GraphicUsersComponent },
   { path: 'graphic-screenings', component: GraphicScreeningsComponent },
-  { path: 'screenings-chart', component: ScreeningsChartComponent }
+  { path: 'screenings-chart', component: ScreeningsChartComponent },
+  { path: 'movie-detail/:id', component: MovieDetailComponent }
 ];
 
 
@@ -58,6 +63,7 @@ const routes: Routes = [
     GraphicUsersComponent,
     GraphicScreeningsComponent,
     ScreeningsChartComponent,
+    MovieDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,6 +79,8 @@ const routes: Routes = [
     MatListModule,
     MatIconModule,
     NgApexchartsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
     // environment.production ? [] : AkitaNgDevtools.forRoot(),
     // AkitaNgRouterStoreModule.forRoot(),
     FormsModule,

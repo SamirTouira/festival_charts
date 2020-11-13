@@ -1,64 +1,51 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import {movies} from '../fake-data';
-import * as data from '../data-ter.json';
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFireObject, AngularFireDatabase } from '@angular/fire/database'
 
 
-export interface Movie {
-    id: number;
-    title: string;
-    languages: string;
-    producer: {
-      firstName: string,
-      lastName: string
-    };
- }
 
 @Injectable({
   providedIn: 'root'
 })
 export class CrudService {
+  movieRef: AngularFireObject<any>;
+  private movieDoc: AngularFirestoreDocument<any>;
+  moviesRef: AngularFirestoreCollection<any> = null;
+  constructor(private db: AngularFirestore, private rm: AngularFireDatabase) {}
 
-  public movies = data.movies;
-  public users = data.users;
-  constructor() { }
-
-  addMovie(movie: Movie) {
-    this.movies.push({
-      id: movie.id,
-      title: movie.title,
-      languages: movie.languages,
-      producer: movie.producer
-    });
+  // Get Movies List
+  getMoviesList(): Observable<any[]> {
+    return this.db.collection('movies', ref => ref.where('storeConfig.status', '==', 'accepted')).valueChanges();
   }
 
-  //Get Movies List
-  getMoviesList(): Observable<Movie[]> {
-    return of(this.movies);
+ // Get a Movie
+  getMovie(id: string){
+    this.movieDoc = this.db.doc(`movies/${id}`);
+    const movie = this.movieDoc.valueChanges();
+    return movie
   }
 
-  getMovie(id: number){
-    return this.movies.find(m => id === m.id);
+  // Create a Movie
+  createMovie(data) {
+    return new Promise<any>((resolve, reject) =>{
+      this.db
+          .collection("movies")
+          .add(data)
+          .then(res => {}, err => reject(err));
+  });
   }
 
-  getUser(id){
-    return this.users.find(u => id === u.id);
+  updateMovie(data){
+    console.log(data);
+    return this.db
+       .collection("movies")
+       .doc(data.id)
+       .update(data);
   }
 
-  getIndex(id){
-    return this.movies.findIndex(m => m.id === id);
+  deleteMovieService(id: string) {
+    this.movieDoc = this.db.doc(`movies/${id}`);
+    this.movieDoc.delete();
   }
-
-  updateMovie(movie: Movie){
-    const index = this.getIndex(movie.id);
-    this.movies.splice(index, 1, movie);
-    console.log(this.movies);
-    return this.movies;
-  }
-
-  deleteMovieService(id) {
-    const index = this.getIndex(id);
-    this.movies.splice(index, 1);
-  }
-
 }

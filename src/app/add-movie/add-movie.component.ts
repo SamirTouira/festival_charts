@@ -19,11 +19,19 @@ export class AddMovieComponent {
 
   ) {
     this.moviesForm = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(2)]],
-      languages: new FormControl(''),
-      producer: this.fb.group({
+      // title: ['', [Validators.required, Validators.minLength(2)]],
+      title: this.fb.group({
+        international: new FormControl(''),
+        original: new FormControl('')
+      }),
+      synopsis: new FormControl(''),
+      // languages: new FormControl(''),
+      directors: this.fb.group({
         firstName: new FormControl(''),
         lastName: new FormControl('')
+      }),
+      storeConfig: this.fb.group({
+        status: 'accepted'
       })
     });
   }
@@ -32,22 +40,26 @@ export class AddMovieComponent {
   get title() {
     return this.moviesForm.get('title');
   }
-  get languages(){
-    return this.moviesForm.get('languages');
+  get synopsis(){
+    return this.moviesForm.get('synopsis');
   }
-  get producer(){
-    return this.moviesForm.get('producer');
+  get directors(){
+    return this.moviesForm.get('directors');
   }
+
+  get storeConfig(){
+    return this.moviesForm.get('storeConfig');
+  }
+
+
   resetForm(){
     this.moviesForm.reset();
   }
   submitMovieData(): void {
      // Submit movie data using CRUD API
-    this.crudApi.addMovie(this.moviesForm.value);
+    this.crudApi.createMovie(this.moviesForm.value);
      // Show success message when data is successfully submited
-     /* tslint:disable:no-string-literal */
-    this.toastr.success(this.moviesForm.controls['title'].value + ' successfully added!');
-    /* tslint:enable:no-string-literal */
+    this.toastr.success(this.moviesForm.controls['title'].value.international + ' successfully added!');
      // Reset form when clicked on reset button
     this.resetForm();
    }
