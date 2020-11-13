@@ -31,7 +31,7 @@ export class AddMovieComponent {
         lastName: new FormControl('')
       }),
       storeConfig: this.fb.group({
-        status: ''
+        status: 'accepted'
       })
     });
   }
@@ -59,10 +59,7 @@ export class AddMovieComponent {
      // Submit movie data using CRUD API
     this.crudApi.createMovie(this.moviesForm.value);
      // Show success message when data is successfully submited
-     /* tslint:disable:no-string-literal */
-    //  console.log(this.moviesForm.controls['title']);
     this.toastr.success(this.moviesForm.controls['title'].value.international + ' successfully added!');
-    /* tslint:enable:no-string-literal */
      // Reset form when clicked on reset button
     this.resetForm();
    }

@@ -61,7 +61,6 @@ export class MovieListComponent implements OnInit {
         original: new FormControl('')
       }),
       synopsis: new FormControl(''),
-      // languages: new FormControl(''),
       directors: this.fb.group({
         firstName: new FormControl(''),
         lastName: new FormControl('')
@@ -70,6 +69,5 @@ export class MovieListComponent implements OnInit {
         status: ''
       })
     });
-    // window.location.replace('edit-movie/' + this.movieId);
   }
 }

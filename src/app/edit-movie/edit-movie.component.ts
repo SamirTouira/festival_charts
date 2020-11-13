@@ -24,13 +24,11 @@ export class EditMovieComponent implements OnInit {
     private toastr: ToastrService       // Toastr service for alert message
   ){
     this.editForm = this.fb.group({
-      // title: ['', [Validators.required, Validators.minLength(2)]],
       title: this.fb.group({
         international: '',
         original: new FormControl('')
       }),
       synopsis: '',
-      // languages: new FormControl(''),
       directors: this.fb.group({
         firstName: new FormControl(''),
         lastName: new FormControl('')
