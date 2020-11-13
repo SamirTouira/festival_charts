@@ -21,10 +21,10 @@ export class MovieDetailComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    const movieIdNumber = this.movieId;
-    this.movie = this.crudApi.getMovie(movieIdNumber);
+    const getMovieId = this.movieId;
+    this.movie = this.crudApi.getMovie(getMovieId);
     console.log(this.movie);
-    this.movie.subscribe(movie => console.log(movie));
+    this.movie.subscribe(movie => movie);
   }
 
 }

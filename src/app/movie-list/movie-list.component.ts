@@ -18,9 +18,6 @@ export class MovieListComponent implements OnInit {
   public movies: Observable<any>;
   public editForm: FormGroup;  // Define FormGroup to movie's edit form
   public movieId = this.actRoute.snapshot.paramMap.get('id');  // Getting current component's id or information using ActivatedRoute service
-  // moviz: AngularFireList<any>;
-  // moviee: AngularFireObject<any>;
-  moviesCollection: Observable<any[]>;
 
   constructor(
   private crudApi: CrudService,
